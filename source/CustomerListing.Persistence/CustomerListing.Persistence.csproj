@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerListing.DB\CustomerListing.DB.csproj" />
+  </ItemGroup>
+
 </Project>
