@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="DB\" />
     <Folder Include="Server\" />
     <Folder Include="Persistence\" />
   </ItemGroup>
@@ -31,6 +30,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerListing.DB\CustomerListing.DB.csproj" />
   </ItemGroup>
 
 </Project>
