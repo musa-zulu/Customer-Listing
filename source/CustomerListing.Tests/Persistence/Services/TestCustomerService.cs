@@ -220,6 +220,26 @@ namespace CustomerListing.Tests.Persistence.Services
             Assert.IsTrue(results);
         }
 
+        [Test]
+        public async Task SearchCustomers_GivenManyCustomersExist_ShouldReturnAListWithAllCustomersMatchingSearchTerm()
+        {
+            //---------------Set up test pack-------------------
+            var firstCustomer = CreateRandomCustomer(Guid.NewGuid());
+            var secondCustomer = CreateRandomCustomer(Guid.NewGuid());
+            var thirdCustomer = CreateRandomCustomer(Guid.NewGuid());
+            var forthCustomer = CreateRandomCustomer(Guid.NewGuid());
+
+            await _db.Add(firstCustomer, secondCustomer, thirdCustomer, forthCustomer);
+
+            var customerService = CreateCustomerService();
+            //---------------Assert Precondition----------------
+            //---------------Execute Test ----------------------
+            var results = await customerService.SearchCustomers(firstCustomer.FirstName);
+            //---------------Test Result -----------------------
+            Assert.IsNotNull(results);
+            Assert.AreEqual(1, results.Count);
+        }
+
         private CustomerService CreateCustomerService()
         {
             return new CustomerService(_db.DbContext);
