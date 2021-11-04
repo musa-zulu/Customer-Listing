@@ -1,6 +1,6 @@
 ﻿namespace CustomerListing.DB.Enums
 {
-    public enum Type
+    public enum CustomerType
     {
         NEW_CUSTOMER = 1,
         LOYAL_CUSTOMER = 2,

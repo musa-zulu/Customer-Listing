@@ -1,10 +1,11 @@
-﻿using CustomerListing.DB.Enums;
+﻿using CustomerListing.DB.Domain;
+using CustomerListing.DB.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CustomerListing.DB.Domain
+namespace CustomerListing.Persistence.V1
 {
-    public class Customer
+    public class RequestResponseBase : EntityBase
     {
         public Guid CustomerId { get; set; }
         [Required]
