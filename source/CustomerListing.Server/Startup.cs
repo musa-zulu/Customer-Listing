@@ -1,56 +1,67 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CustomerListing.Server.Installers;
+using Microsoft.Extensions.Configuration;
+using CustomerListing.Server.Options;
+using CustomerListing.DB;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace CustomerListing.Server
 {
     public class Startup
     {
+        private readonly IConfigurationRoot configRoot;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            configRoot = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.InstallServicesInAssembly(Configuration, configRoot);
+            services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+
+            app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
+
+            app.UseSwaggerUI(option =>
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
+            });
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
-            app.UseRouting();
+            app.UseCors(options =>
+                        options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            app.UseAuthorization();
+            app.UseMvc();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            // This returns the context.
+            using var context = services.GetService<ApplicationDbContext>();
+            context.Database.Migrate();
         }
     }
 }
