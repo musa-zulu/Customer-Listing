@@ -2,6 +2,7 @@
 using CustomerListing.Persistence.V1.Requests.Queries;
 using System;
 using CustomerListing.Persistence.Interfaces.Services;
+using CustomerListing.Persistence.V1;
 
 namespace CustomerListing.Persistence.Services
 {
@@ -28,6 +29,11 @@ namespace CustomerListing.Persistence.Services
 
             return new Uri(modifiedUri);
 
+        }
+
+        public Uri GetCustomerUri(string customerId)
+        {
+            return new Uri(_baseUri + ApiRoutes.Customers.Get.Replace("{customerId}", customerId));
         }
     }
 }
