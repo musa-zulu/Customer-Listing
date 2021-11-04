@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Server\" />
-    <Folder Include="Persistence\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +32,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerListing.DB\CustomerListing.DB.csproj" />
+    <ProjectReference Include="..\CustomerListing.Persistence\CustomerListing.Persistence.csproj" />
+    <ProjectReference Include="..\CustomerListing.Server\CustomerListing.Server.csproj" />
   </ItemGroup>
 
 </Project>

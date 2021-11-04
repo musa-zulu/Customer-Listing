@@ -12,5 +12,6 @@ namespace CustomerListing.Persistence.Interfaces.Services
         Task<Customer> GetCustomerByIdAsync(Guid customerId);
         Task<bool> UpdateCustomerAsync(Customer customerToUpdate);
         Task<bool> DeleteCustomerAsync(Guid customerId);
+        Task<List<Customer>> SearchCustomers(string searchTerm);
     }
 }

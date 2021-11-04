@@ -68,5 +68,15 @@ namespace CustomerListing.Persistence.Services
             _dataContext.Customers.Remove(customer);
             return await _dataContext.SaveChangesAsync() > 0;
         }
+
+       public async Task<List<Customer>> SearchCustomers(string searchTerm)
+        {
+            return await _dataContext.Customers.AsNoTracking()                
+                .Where(b => b.FirstName.ToLowerInvariant().Contains(searchTerm.ToLowerInvariant()) ||
+                            b.LastName.ToLowerInvariant().Contains(searchTerm.ToLowerInvariant()) ||
+                            b.Email.ToLowerInvariant().Contains(searchTerm.ToLowerInvariant()) ||
+                            b.Cellphone.ToLowerInvariant().Contains(searchTerm.ToLowerInvariant()))
+                .ToListAsync();
+        }
     }
 }
