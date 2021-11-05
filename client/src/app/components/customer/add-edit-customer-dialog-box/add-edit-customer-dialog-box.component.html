@@ -31,15 +31,15 @@
         <mat-form-field *ngIf="action !== 'Delete';">
             <input #amountTotal="ngModel" placeholder="Total Amount" matInput
                 [(ngModel)]="localData.amountTotal" name="amountTotal" id="amountTotal" type="number"
-                class="form-control" appearance="fill">            
+                class="form-control" appearance="fill" >            
         </mat-form-field>
     </div>
 
     <div class="form-group">
         <mat-form-field *ngIf="action !== 'Delete'" hintLabel="Max 10 digits...">
-            <input #cellphone="ngModel" pattern="[0-9]+" min="0" type="number" maxlength="5"placeholder="cellphone" matInput
+            <input #cellphone="ngModel" pattern="^[a-zA-Z0-9 ]*$" min="0" type="number" maxlength="10"placeholder="cellphone" matInput
                 [(ngModel)]="localData.cellphone" name="cellphone" id="cellphone" class="form-control"
-                type="number" max="10"
+                type="number" 
                 appearance="fill">
         </mat-form-field>
     </div>

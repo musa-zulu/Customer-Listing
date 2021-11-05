@@ -20,8 +20,6 @@ export class AddEditCustomerDialogBoxComponent {
   action: string;
   localData: any;
   customer: Customer = new Customer();
-  customerType = CustomerType;
-  enumKeys=[];
 
   constructor(    
     public dialogRef: MatDialogRef<AddEditCustomerDialogBoxComponent>,
@@ -29,7 +27,6 @@ export class AddEditCustomerDialogBoxComponent {
   ) {
     this.localData = { ...data };
     this.action = this.localData.action;
-    this.enumKeys = Object.keys(this.customerType);
   }
 
   doAction() {
