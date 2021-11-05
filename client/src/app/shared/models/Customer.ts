@@ -3,7 +3,7 @@ export class Customer {
     firstName: string;    
     lastName: string;
     email: string;    
-    Cellphone: string;
-    AmountTotal: string;   
+    Cellphone: number;
+    AmountTotal: number;   
     type: string; 
 }

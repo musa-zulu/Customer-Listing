@@ -22,7 +22,7 @@
     <div class="form-group">
         <mat-form-field *ngIf="action !== 'Delete';">
             <input #email="ngModel" placeholder="Email" matInput
-                [(ngModel)]="localData.email" name="email" id="email" type="text" email="true"
+                [(ngModel)]="localData.email" name="email" id="email" type="text"
                 class="form-control" appearance="fill">            
         </mat-form-field>
     </div>
@@ -32,15 +32,6 @@
             <input #amountTotal="ngModel" placeholder="Total Amount" matInput
                 [(ngModel)]="localData.amountTotal" name="amountTotal" id="amountTotal" type="number"
                 class="form-control" appearance="fill" >            
-        </mat-form-field>
-    </div>
-
-    <div class="form-group">
-        <mat-form-field *ngIf="action !== 'Delete'" hintLabel="Max 10 digits...">
-            <input #cellphone="ngModel" pattern="^[a-zA-Z0-9 ]*$" min="0" type="number" maxlength="10"placeholder="cellphone" matInput
-                [(ngModel)]="localData.cellphone" name="cellphone" id="cellphone" class="form-control"
-                type="number" 
-                appearance="fill">
         </mat-form-field>
     </div>
 

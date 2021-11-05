@@ -18,7 +18,7 @@ export enum CustomerType {
 export class AddEditCustomerDialogBoxComponent {
 
   action: string;
-  localData: any;
+  localData: Customer;
   customer: Customer = new Customer();
 
   constructor(    

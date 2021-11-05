@@ -23,7 +23,6 @@ export class CustomerComponent implements OnInit {
     "firstName",
     "lastName",
     "email",
-    "cellphone",
     "amountTotal",
     "action"
   ];
@@ -65,10 +64,8 @@ export class CustomerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event !== "Cancel") {
-        let regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*){0,1}$/g);
-        let isValid = (result.data.firstName !== "" && result.data.lastName !== ""
-              && result.data.email !== "" );
-        if (regex.test(result.data.cellphone) || result.data.cellphone === "" || result.data.cellphone === undefined) {
+        let isValid = (result.data.firstName !== "" && result.data.lastName !== "");
+        if (isValid) {
           if (action === "Add" && isValid) {
             this.addCustomer(result.data);
           } else if (action === "Update" && isValid) {
@@ -87,36 +84,36 @@ export class CustomerComponent implements OnInit {
     await this._customersService
       .addCustomer(customer)
       .then((result) => {
+        this.refreshTable();
         this._alertService.success("Customer was saved successfully !!");
       })
       .catch((error) => {
         this._alertService.error("Data was not saved, please try again");
       });
-    this.refreshTable();
   }
 
   async updateCustomer(customer: Customer) {
     this._customersService
       .updateCustomer(customer)
       .then((result) => {
+        this.refreshTable();
         this._alertService.success("Customer was updated successfully !!");
       })
       .catch((error) => {
         this._alertService.error("Data was not updated, please try again");
       });
-    this.refreshTable();
   }
 
   async deleteCustomer(customer: Customer) {
     this._customersService
       .deleteCustomer(customer)
       .then((result) => {
+        this.refreshTable();
         this._alertService.success("Customer was deleted successfully !!");
       })
       .catch((error) => {
         this._alertService.error("Data was not deleted, please try again");
-      });
-    this.refreshTable();
+      });    
   }
 
   refreshTable() {
