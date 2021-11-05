@@ -5,8 +5,8 @@ import { Customer } from 'src/app/shared/models/Customer';
 
 export enum CustomerType {
   NEW_CUSTOMER="NEW CUSTOMER",
-  LOYAL_CUSTOMER="LOYAL CUSTOMER", 
-  DISCOUNT_CUSTOMER="DISCOUNT CUSTOMER", 
+  LOYAL_CUSTOMER="LOYAL CUSTOMER",
+  DISCOUNT_CUSTOMER="DISCOUNT CUSTOMER",
   POTENTIAL_CUSTOMER="POTENTIAL CUSTOMER"
   }
 
@@ -18,10 +18,10 @@ export enum CustomerType {
 export class AddEditCustomerDialogBoxComponent {
 
   action: string;
-  localData: Customer;
+  localData: any;
   customer: Customer = new Customer();
 
-  constructor(    
+  constructor(
     public dialogRef: MatDialogRef<AddEditCustomerDialogBoxComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Customer
   ) {
