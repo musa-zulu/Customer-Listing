@@ -18,7 +18,6 @@ namespace CustomerListing.DB.Domain
         [MaxLength(10)]
         public string Cellphone { get; set; }
         public decimal AmountTotal { get; set; }
-        [Required]
         public CustomerType Type { get; set; }
     }
 }

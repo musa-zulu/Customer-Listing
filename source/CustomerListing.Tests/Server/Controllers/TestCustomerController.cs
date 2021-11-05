@@ -400,43 +400,6 @@ namespace CustomerListing.Tests.Server.Controllers
         }
 
         [Test]
-        public async Task Update_ShouldReturnBadRequest_GivenACustomerIdIsEmpty()
-        {
-            //---------------Set up test pack-------------------
-            var request = new UpdateCustomerRequest
-            {
-                CustomerId = Guid.Empty
-            };
-            var controller = CreateCustomersControllerBuilder()
-                                   .Build();
-            //---------------Assert Precondition----------------
-            //---------------Execute Test ----------------------
-            var result = await controller.Update(request) as BadRequestObjectResult;
-            //---------------Test Result -----------------------
-            Assert.IsNotNull(result);
-            Assert.AreEqual((int)HttpStatusCode.BadRequest, result.StatusCode);
-        }
-
-        [Test]
-        public async Task Update_ShouldReturnBadRequestWithMessage_GivenACustomerIdIsEmpty()
-        {
-            //---------------Set up test pack-------------------
-            var request = new UpdateCustomerRequest
-            {
-                CustomerId = Guid.Empty
-            };
-            var controller = CreateCustomersControllerBuilder()
-                                   .Build();
-            //---------------Assert Precondition----------------
-            //---------------Execute Test ----------------------
-            var result = await controller.Update(request) as BadRequestObjectResult;
-            //---------------Test Result -----------------------
-            var response = result.Value as ErrorResponse;
-            Assert.AreEqual(1, response.Errors.Count);
-            Assert.AreEqual("The customer does not exist, or the id is empty.", response.Errors[0].Message);
-        }
-
-        [Test]
         public async Task Update_ShouldReturnNotfound_GivenACustomerHasNotBeenUpdated()
         {
             //---------------Set up test pack-------------------

@@ -82,3 +82,9 @@ source/Customer-Listing.Tests/obj/Debug/net5.0/
 *.cache
 
 *.v2
+
+client/.angular/cache/angular-webpack/dff39aaed76e1af7ed7ea953dacd503bc43df2b8/
+
+client/.angular/cache/babel-webpack/
+
+*.manifest
